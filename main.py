@@ -10,7 +10,7 @@ from torch.utils.tensorboard import SummaryWriter
 from core.test import test
 from core.train import train
 from core.utils import init_logger, make_results_dir, set_seed
-if __name__ == '__main__':
+if __name__ == '__main__': 
     # Lets gather arguments
     parser = argparse.ArgumentParser(description='EfficientZero')
     parser.add_argument('--env', required=True, help='Name of the environment')
