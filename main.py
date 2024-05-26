@@ -13,13 +13,13 @@ from core.utils import init_logger, make_results_dir, set_seed
 if __name__ == '__main__': 
     # Lets gather arguments
     parser = argparse.ArgumentParser(description='EfficientZero')
-    parser.add_argument('--env', required=True, help='Name of the environment')
+    parser.add_argument('--env', default="BreakoutNoFrameskip-v4", help='Name of the environment')
     parser.add_argument('--result_dir', default=os.path.join(os.getcwd(), 'results'),
                         help="Directory Path to store results (default: %(default)s)")
-    parser.add_argument('--case', required=True, choices=['atari'],
+    parser.add_argument('--case', default="atari", choices=['atari'],
                         help="It's used for switching between different domains(default: %(default)s)")
-    parser.add_argument('--opr', required=True, choices=['train', 'test'])
-    parser.add_argument('--amp_type', required=True, choices=['torch_amp', 'none'],
+    parser.add_argument('--opr', default="train", choices=['train', 'test'])
+    parser.add_argument('--amp_type', default="torch_amp", choices=['torch_amp', 'none'],
                         help='choose automated mixed precision type')
     parser.add_argument('--no_cuda', action='store_true', default=False, help='no cuda usage (default: %(default)s)')
     parser.add_argument('--debug', action='store_true', default=False,
@@ -30,12 +30,12 @@ if __name__ == '__main__':
     parser.add_argument('--save_video', action='store_true', default=False, help='save video in test.')
     parser.add_argument('--force', action='store_true', default=False,
                         help='Overrides past results (default: %(default)s)')
-    parser.add_argument('--cpu_actor', type=int, default=14, help='batch cpu actor')
-    parser.add_argument('--gpu_actor', type=int, default=20, help='batch bpu actor')
+    parser.add_argument('--cpu_actor', type=int, default=1, help='batch cpu actor')
+    parser.add_argument('--gpu_actor', type=int, default=1, help='batch bpu actor')
     parser.add_argument('--p_mcts_num', type=int, default=4, help='number of parallel mcts')
     parser.add_argument('--seed', type=int, default=0, help='seed (default: %(default)s)')
-    parser.add_argument('--num_gpus', type=int, default=4, help='gpus available')
-    parser.add_argument('--num_cpus', type=int, default=80, help='cpus available')
+    parser.add_argument('--num_gpus', type=int, default=1, help='gpus available')
+    parser.add_argument('--num_cpus', type=int, default=10, help='cpus available')
     parser.add_argument('--revisit_policy_search_rate', type=float, default=0.99,
                         help='Rate at which target policy is re-estimated (default: %(default)s)')
     parser.add_argument('--use_root_value', action='store_true', default=False,
@@ -52,7 +52,8 @@ if __name__ == '__main__':
     parser.add_argument('--info', type=str, default='none', help='debug string')
     parser.add_argument('--load_model', action='store_true', default=False, help='choose to load model')
     parser.add_argument('--model_path', type=str, default='./results/test_model.p', help='load model path')
-    parser.add_argument('--object_store_memory', type=int, default=150 * 1024 * 1024 * 1024, help='object store memory')
+    parser.add_argument('--object_store_memory', type=int, default=50 * 1024 * 1024 * 1024, help='object store memory')
+
 
     # Process arguments
     args = parser.parse_args()

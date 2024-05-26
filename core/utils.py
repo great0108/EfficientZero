@@ -251,6 +251,7 @@ def set_seed(seed):
 
 def make_results_dir(exp_path, args):
     # make the result directory
+    print(exp_path)
     os.makedirs(exp_path, exist_ok=True)
     if args.opr == 'train' and os.path.exists(exp_path) and os.listdir(exp_path):
         if not args.force:

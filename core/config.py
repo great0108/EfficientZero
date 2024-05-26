@@ -413,7 +413,8 @@ class BaseConfig(object):
         if args.revisit_policy_search_rate is not None:
             self.revisit_policy_search_rate = args.revisit_policy_search_rate
 
-        localtime = time.asctime(time.localtime(time.time()))
+        localtime = time.localtime(time.time())
+        localtime = time.strftime('%Y-%m-%d %H-%M-%S', localtime)
         seed_tag = 'seed={}'.format(self.seed)
         self.exp_path = os.path.join(args.result_dir, args.case, args.info, args.env, seed_tag, localtime)
 

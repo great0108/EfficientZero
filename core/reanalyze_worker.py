@@ -69,7 +69,7 @@ class BatchWorker_CPU(object):
             # off-policy correction: shorter horizon of td steps
             delta_td = (total_transitions - idx) // config.auto_td_steps
             td_steps = config.td_steps - delta_td
-            td_steps = np.clip(td_steps, 1, 5).astype(np.int)
+            td_steps = np.clip(td_steps, 1, 5).astype(np.intc)
 
             # prepare the corresponding observations for bootstrapped values o_{t+k}
             game_obs = game.obs(state_index + td_steps, config.num_unroll_steps)
@@ -258,8 +258,9 @@ class BatchWorker_CPU(object):
                 # Observation will be deleted if replay buffer is full. (They are stored in the ray object store)
                 try:
                     self.make_batch(batch_context, self.config.revisit_policy_search_rate, weights=target_weights)
-                except:
-                    print('Data is deleted...')
+                except Exception as e:
+                    # print('Data is deleted...')
+                    print(e)
                     time.sleep(0.1)
 
 
