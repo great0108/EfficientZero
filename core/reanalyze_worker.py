@@ -259,8 +259,7 @@ class BatchWorker_CPU(object):
                 try:
                     self.make_batch(batch_context, self.config.revisit_policy_search_rate, weights=target_weights)
                 except Exception as e:
-                    # print('Data is deleted...')
-                    print(e)
+                    print('Data is deleted...')
                     time.sleep(0.1)
 
 

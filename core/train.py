@@ -68,6 +68,8 @@ def update_weights(model, batch, optimizer, replay_buffer, config, scaler, vis_r
     obs_batch_ori = torch.from_numpy(obs_batch_ori).to(config.device).float() / 255.0
     obs_batch = obs_batch_ori[:, 0: config.stacked_observations * config.image_channel, :, :]
     obs_target_batch = obs_batch_ori[:, config.image_channel:, :, :]
+    obs_batch = obs_batch.copy_(obs_batch)
+    obs_target_batch = obs_target_batch.copy_(obs_target_batch)
 
     # do augmentations
     if config.use_augmentation:
